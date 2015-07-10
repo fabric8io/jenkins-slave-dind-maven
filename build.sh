@@ -1,5 +1,6 @@
 #!/bin/bash
 
+mkdir -p images
 echo "Pulling the images"
 for img in maven; do
   docker pull ${img}
