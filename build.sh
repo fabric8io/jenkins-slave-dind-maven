@@ -1,10 +1,5 @@
 #!/bin/bash
-
-mkdir -p images
-echo "Pulling the images"
-for img in maven; do
-  docker pull ${img}
-  docker save ${img} > images/${img}.tar
-done
-
-docker build -t fabric8/jenkins-slave-dind-maven .
+docker run --privileged -d --name jslavetmp fabric8/jenkins-slave-dind
+docker exec -it jslavetmp  docker pull maven
+sleep 2
+docker commit jslavetmp fabric8/jenkins-slave-dind-maven
